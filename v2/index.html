@@ -1,0 +1,348 @@
+<!DOCTYPE html><html lang="en"><head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Infento — Finally, a Lego set you can actually ride</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --orange-500:#C41E3A;--orange-600:#B01932;--orange-700:#9C162A;
+  --sunny-400:#FFC83D;--sunny-600:#E2A510;
+  --sky-100:#C8EBEF;--sky-400:#34B7C4;--sky-500:#149AA8;--sky-700:#0C6B76;
+  --ink-950:#18130F;--ink-900:#241D17;--ink-850:#2C241D;--ink-800:#38302A;--ink-700:#4E443C;
+  --ink-600:#6E6258;--ink-500:#8C8075;--ink-400:#B0A597;--ink-300:#D2C8BA;--ink-200:#E7DECF;--ink-50:#FBF7F0;
+  --white:#FFFFFF;
+
+  --brand:var(--orange-500);--brand-hover:var(--orange-600);--brand-pressed:var(--orange-700);--on-brand:var(--white);
+  --page:#120E0B;            /* deeper than ink-950 for garage depth */
+  --card:var(--ink-900);
+  --card-2:var(--ink-850);
+  --text-strong:#FBF7F0;--text-body:rgba(251,247,240,.82);--text-muted:rgba(251,247,240,.56);
+  --text-subtle:rgba(251,247,240,.4);--border:rgba(251,247,240,.12);--border-strong:rgba(251,247,240,.22);
+
+  --font-display:'Bricolage Grotesque','Inter',system-ui,sans-serif;
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'Space Mono',ui-monospace,Menlo,monospace;
+  --fw-semibold:600;--fw-bold:700;--fw-extra:800;
+
+  --radius-md:16px;--radius-lg:22px;--radius-xl:28px;--radius-2xl:36px;--radius-pill:999px;
+  --shadow-lg:0 24px 60px rgba(0,0,0,.5);--shadow-brand:0 10px 30px rgba(196,30,58,.4);
+  --dur-base:200ms;--ease-out:cubic-bezier(.22,1,.36,1);
+  --container:1180px;--gutter:1.5rem;--section-y:6rem;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;font-family:var(--font-sans);font-size:1rem;line-height:1.55;color:var(--text-body);
+  background:var(--page);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+h1,h2,h3,h4{font-family:var(--font-display);color:var(--text-strong);margin:0;font-weight:var(--fw-bold);text-wrap:balance;}
+p{margin:0;text-wrap:pretty;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--container);margin:0 auto;padding-inline:var(--gutter);}
+
+.over{font-family:var(--font-mono);font-size:.7rem;line-height:1.2;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:var(--fw-bold);color:var(--sunny-400);}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;font-family:var(--font-sans);
+  font-weight:var(--fw-semibold);font-size:1.0625rem;line-height:1;white-space:nowrap;border:1.5px solid transparent;
+  background:var(--brand);color:var(--on-brand);border-radius:var(--radius-pill);cursor:pointer;text-decoration:none;
+  padding:0 1.75rem;height:3.375rem;box-shadow:var(--shadow-brand);
+  transition:transform var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out);}
+.btn:hover{transform:translateY(-2px);background:var(--brand-hover);}
+.btn:active{transform:scale(.97);background:var(--brand-pressed);}
+.btn--sm{height:2.6rem;font-size:.9375rem;padding:0 1.1rem;}
+.btn--ghost{background:transparent;color:var(--text-strong);border-color:var(--border-strong);box-shadow:none;}
+.btn--ghost:hover{background:rgba(251,247,240,.08);}
+.btn .ico{width:1.15em;height:1.15em;}
+
+.badge{display:inline-flex;align-items:center;gap:.4em;font-family:var(--font-mono);font-size:.72rem;
+  font-weight:var(--fw-bold);line-height:1;letter-spacing:.06em;text-transform:uppercase;padding:.5em .8em;border-radius:var(--radius-pill);}
+.badge--sky{background:rgba(52,183,196,.16);color:var(--sky-400);border:1px solid rgba(52,183,196,.35);}
+.badge--brand{background:var(--brand);color:var(--on-brand);}
+
+.stars{display:inline-flex;gap:.12rem;color:var(--sunny-400);}
+.stars svg{width:1.15rem;height:1.15rem;}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--page) 86%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav__in{display:flex;align-items:center;justify-content:space-between;height:4.5rem;}
+.nav__logo{height:1.85rem;width:auto;filter:brightness(0) invert(1);}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(80% 120% at 78% 8%,rgba(196,30,58,.28),transparent 52%),
+  radial-gradient(60% 90% at 6% 96%,rgba(52,183,196,.14),transparent 55%);pointer-events:none;}
+.hero__bg{position:absolute;inset:0;background-image:linear-gradient(rgba(251,247,240,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(251,247,240,.04) 1px,transparent 1px);background-size:42px 42px;
+  mask-image:radial-gradient(120% 100% at 50% 0,#000,transparent 75%);pointer-events:none;}
+.hero__grid{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:3rem;align-items:center;padding:4rem 0 4.5rem;}
+.hero h1{font-size:clamp(2.6rem,5.4vw,4.6rem);line-height:.96;letter-spacing:-.035em;margin:1.2rem 0 1.3rem;}
+.hero h1 em{font-style:normal;color:var(--brand);}
+.lead{font-size:1.1875rem;line-height:1.55;color:var(--text-body);max-width:46ch;}
+.lead b{color:var(--text-strong);font-weight:600;}
+.hero__cta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem;}
+.spec{display:flex;gap:0;margin-top:2.25rem;border:1px solid var(--border);border-radius:var(--radius-md);
+  overflow:hidden;background:rgba(251,247,240,.03);max-width:30rem;}
+.spec div{flex:1;padding:.9rem 1rem;text-align:center;border-right:1px solid var(--border);}
+.spec div:last-child{border-right:none;}
+.spec .n{font-family:var(--font-display);font-weight:800;font-size:1.5rem;color:var(--text-strong);line-height:1;}
+.spec .l{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-top:.4rem;}
+.media{border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-lg);background:var(--card);
+  border:1px solid var(--border);}
+.media img{width:100%;height:100%;object-fit:cover;display:block;}
+/* decorative rounded block backdrop */
+.fig{position:relative;isolation:isolate;}
+.fig>.media{position:relative;z-index:1;}
+.fig__block{position:absolute;z-index:0;width:100%;height:auto;left:14%;top:-6%;color:#2E333E;pointer-events:none;}
+.cap{font-size:.75rem;color:var(--text-subtle);font-style:italic;margin-top:.7rem;text-align:center;}
+
+/* proof */
+.proof{border-bottom:1px solid var(--border);}
+.proof__in{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.6rem 1.6rem;padding:1.4rem 0;}
+.proof__item{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.04em;color:var(--text-muted);}
+.proof__item b{color:var(--sunny-400);font-weight:700;}
+.proof__sep{width:5px;height:5px;border-radius:50%;background:var(--border-strong);}
+
+/* section */
+.sec{padding:var(--section-y) 0;}
+.sec__head{max-width:52ch;margin:0 0 3rem;}
+.sec__head.center{margin-inline:auto;text-align:center;}
+.sec__head h2{font-size:clamp(2.1rem,4vw,3rem);line-height:1.04;letter-spacing:-.025em;margin-top:.7rem;}
+.sec__head p{font-size:1.125rem;color:var(--text-muted);margin-top:.9rem;}
+
+/* product cards (two kits) */
+.kits{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.kit{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;
+  transition:transform var(--dur-base) var(--ease-out),border-color var(--dur-base);}
+.kit:hover{transform:translateY(-4px);border-color:var(--border-strong);}
+.kit .ph{aspect-ratio:16/10;background:#0c0a08;position:relative;}
+.kit .ph img{width:100%;height:100%;object-fit:cover;}
+.kit .ph .tag{position:absolute;top:1rem;left:1rem;}
+.kit__body{padding:1.6rem 1.75rem 1.9rem;}
+.kit__body h3{font-size:1.625rem;letter-spacing:-.015em;}
+.kit__meta{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sunny-400);margin-top:.45rem;}
+.kit__body p{color:var(--text-muted);margin-top:.9rem;}
+.kit__feats{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem;}
+.chip{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-body);
+  border:1px solid var(--border-strong);border-radius:var(--radius-pill);padding:.42em .8em;}
+.kicker{text-align:center;font-family:var(--font-display);font-weight:700;font-size:clamp(1.4rem,2.8vw,2rem);
+  letter-spacing:-.02em;color:var(--text-strong);margin-top:2.75rem;}
+.kicker span{color:var(--brand);}
+
+/* value props */
+.props{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.prop{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:2rem 1.75rem;}
+.prop__ico{width:3.25rem;height:3.25rem;border-radius:var(--radius-md);background:rgba(196,30,58,.14);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;border:1px solid rgba(196,30,58,.3);}
+.prop__ico svg{width:1.6rem;height:1.6rem;}
+.prop h3{font-size:1.375rem;letter-spacing:-.01em;margin-bottom:.5rem;}
+.prop p{color:var(--text-muted);}
+.prop p b{color:var(--text-body);font-weight:600;}
+
+/* testimonial */
+.quote{border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(196,30,58,.06),transparent);}
+.quote__in{max-width:50rem;margin:0 auto;text-align:center;padding:var(--section-y) 0;}
+.quote blockquote{font-family:var(--font-display);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.5rem);
+  line-height:1.2;letter-spacing:-.02em;color:var(--text-strong);margin:1.5rem 0 1.75rem;}
+.quote figcaption{font-size:1rem;color:var(--text-muted);}
+.quote figcaption b{color:var(--text-strong);}
+
+/* final */
+.final{padding:var(--section-y) 0;}
+.final__band{border:1px solid var(--border-strong);border-radius:var(--radius-2xl);padding:clamp(2.75rem,5vw,4.5rem);
+  text-align:center;position:relative;overflow:hidden;background:var(--card);}
+.final__band::before{content:"";position:absolute;inset:0;background-image:
+  linear-gradient(rgba(251,247,240,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(251,247,240,.05) 1px,transparent 1px);
+  background-size:38px 38px;mask-image:radial-gradient(80% 100% at 50% 0,#000,transparent 70%);}
+.final__band::after{content:"";position:absolute;inset:0;background:radial-gradient(100% 120% at 50% -10%,rgba(196,30,58,.3),transparent 55%);}
+.final__band>*{position:relative;}
+.final h2{font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:1.0;letter-spacing:-.03em;}
+.final p{color:var(--text-muted);font-size:1.1875rem;margin:1.1rem auto 2rem;max-width:50ch;}
+.final .fine{color:var(--text-subtle);font-family:var(--font-mono);font-size:.78rem;letter-spacing:.08em;margin-top:1.1rem;}
+
+/* footer */
+.foot{border-top:1px solid var(--border);padding:2.5rem 0;}
+.foot__in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.foot img{height:1.5rem;filter:brightness(0) invert(1);opacity:.85;}
+.foot span{font-family:var(--font-mono);font-size:.75rem;color:var(--text-subtle);letter-spacing:.04em;}
+
+@media (max-width:880px){
+  :root{--section-y:4rem;}
+  .hero__grid{grid-template-columns:1fr;gap:2.25rem;padding:2.5rem 0 3rem;}
+  .lead{max-width:none;}
+  .kits{grid-template-columns:1fr;}
+  .props{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body style="">
+<main data-screen-label="Makers landing">
+
+  <header class="nav">
+    <div class="wrap nav__in">
+      <img class="nav__logo" src="assets/logo-horizontal.png" alt="Infento">
+      <a class="btn btn--sm" href="#buy">Build the Ultimate Kit</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="wrap hero__grid">
+      <div>
+        <span class="over">890 modular parts · You build it · You ride it</span>
+        <h1>Finally. A Lego set you can <em>actually ride.</em></h1>
+        <p class="lead"><b>890 modular aluminium parts. Electric motor. Drift mode.</b> Build a go-kart, a quad, or a DeLorean — then take it apart and build something wilder.</p>
+        <div class="hero__cta">
+          <a class="btn" href="#buy">Build the Ultimate Kit
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+          </a>
+          <a class="btn btn--ghost" href="#builds">See the builds</a>
+        </div>
+        <div class="spec">
+          <div><div class="n">890</div><div class="l">Parts</div></div>
+          <div><div class="n">72+</div><div class="l">Builds</div></div>
+          <div><div class="n">100%</div><div class="l">Aluminium</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="fig">
+          <svg class="fig__block" viewBox="0 0 898 686" aria-hidden="true" style="height: 1082px;"><path d="M885.128 391.452L590.922 20.8066C572.834 -1.98012 540.13 -6.73958 516.298 9.94671L23.4564 355.017C-8.46803 377.37 -7.65985 424.917 25.0058 446.172L378.982 676.494C394.98 686.903 415.231 688.274 432.486 680.116L865.558 475.369C897.585 460.227 907.153 419.199 885.128 391.452Z" fill="currentColor"></path></svg>
+          <div style="position:relative;z-index:1;background:none;border:none;box-shadow:none;margin:-8% -12% -8% -8%;">
+            <img src="uploads/f5187960d5a34ae4929d726f094358c3.png" alt="Father and son building an Infento go-kart together" style="width:100%;display:block;-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 46%,black 44%,transparent 100%);mask-image:radial-gradient(ellipse 80% 80% at 50% 46%,black 44%,transparent 100%);">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="proof">
+    <div class="wrap proof__in">
+      <span class="proof__item"><b>$848K</b> raised on Kickstarter</span>
+      <span class="proof__sep"></span>
+      <span class="proof__item">Featured in <b>Wired</b> &amp; <b>TechCrunch</b></span>
+      <span class="proof__sep"></span>
+      <span class="proof__item"><b>2,500+</b> builders worldwide</span>
+    </div>
+  </section>
+
+  <!-- PRODUCT -->
+  <section class="sec" id="builds">
+    <div class="wrap">
+      <div class="sec__head">
+        <span class="over">The hardware</span>
+        <h2>Two kits. One serious build project.</h2>
+        <p>Start with the flagship parts library, then add the electric drivetrain when you want it to move on its own.</p>
+      </div>
+      <div class="kits">
+        <article class="kit">
+          <div class="ph">
+            <span class="tag badge badge--brand">Flagship · 890 parts</span>
+            <img src="uploads/Ultimate-Kit.webp" alt="Infento Ultimate Kit — boy riding a go-kart on a dirt track" style="object-position: center center; width: 606px; object-fit: cover; height: 462px;">
+          </div>
+          <div class="kit__body">
+            <h3>Ultimate Kit</h3>
+            <p class="kit__meta">890 parts · 72+ builds · ages 0–14</p>
+            <p>The full parts library. Go-karts, quads, trikes, drift machines — and the wild stuff that isn't in any manual yet, like a full-size DeLorean concept.</p>
+            <div class="kit__feats">
+              <span class="chip">Glass-fiber connectors</span>
+              <span class="chip">360° platform</span>
+              <span class="chip">SX2™ steering</span>
+            </div>
+          </div>
+        </article>
+        <article class="kit">
+          <div class="ph">
+            <span class="tag badge badge--sky">Electric</span>
+            <img src="uploads/Volt-Kit.webp" alt="Infento Volt Kit — teen riding an electric scooter on a track" style="object-position: center center; height: 463px;">
+          </div>
+          <div class="kit__body">
+            <h3>Volt Kit</h3>
+            <p class="kit__meta">400 parts · 11 electric rides · drift mode</p>
+            <p>The ePulse™ hub motor and three speed settings drop into any build. Wire up an electric go-kart, then flip it into drift mode and hold the slide.</p>
+            <div class="kit__feats">
+              <span class="chip">ePulse™ Hub Motor</span>
+              <span class="chip">3 speed settings</span>
+              <span class="chip">Driftlock™ 2.0</span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="kicker">If you can think it, <span>you can build it.</span></p>
+    </div>
+  </section>
+
+  <!-- VALUE PROPS -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="props">
+        <div class="prop">
+          <span class="prop__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 12.5a1 1 0 0 0 .8 1.6H11l-1 8 8.5-10.6a1 1 0 0 0-.8-1.5H12l1-8z"></path></svg></span>
+          <h3>Electric &amp; modular</h3>
+          <p><b>ePulse™ Hub Motor.</b> Three speed settings. Drops into any build you can dream up.</p>
+        </div>
+        <div class="prop">
+          <span class="prop__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 4.9 4.9l-9 9a2.1 2.1 0 0 1-3-3l9-9a4 4 0 0 0-4.9-4.9l3 3-1.9 1.9-3-3a4 4 0 0 0 4.9 1.1"></path></svg></span>
+          <h3>890 precision parts</h3>
+          <p><b>100% aluminium.</b> Glass-fiber connectors. Built to ride hard and last for decades.</p>
+        </div>
+        <div class="prop">
+          <span class="prop__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"></path><path d="M3 21v-5h5"></path></svg></span>
+          <h3>Infinite builds</h3>
+          <p>Take it apart. Start over. Build something <b>no one has built before.</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="quote">
+    <div class="wrap">
+      <figure class="quote__in" style="margin:0">
+        <span class="stars" aria-label="5 out of 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+        </span>
+        <blockquote>“I bought this ‘for my son.’ He gets to ride it. I get to build it. Best purchase I've made in years.”</blockquote>
+        <figcaption><b>Mark</b> · 38 · mechanical engineer · Germany</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final" id="buy">
+    <div class="wrap">
+      <div class="final__band">
+        <span class="over" style="color:var(--sunny-400)">Ships worldwide · Free returns</span>
+        <h2 style="margin-top:1rem">Your next build is waiting.</h2>
+        <p>Free returns. Ships worldwide. Built for people who take making seriously.</p>
+        <a class="btn" href="#">Start Building
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+        </a>
+        <p class="fine">JOIN 2,500+ BUILDERS IN 45 COUNTRIES</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <img src="assets/logo-horizontal.png" alt="Infento">
+      <span>© 2026 Infento Rides · Engineered in Amsterdam</span>
+    </div>
+  </footer>
+
+</main>
+
+
+<script src="https://gtmpx.com/ga"></script></body></html>
