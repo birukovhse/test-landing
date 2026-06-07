@@ -89,6 +89,9 @@ img{max-width:100%;display:block;}
 .fig{position:relative;isolation:isolate;}
 .fig>.media{position:relative;z-index:1;}
 .fig__block{position:absolute;z-index:0;width:100%;height:auto;left:14%;top:-6%;color:#CDE9F0;pointer-events:none;}
+/* cutout mode: transparent PNG floats on the block backdrop */
+.fig--cutout .media{background:transparent;box-shadow:none;border:none;overflow:visible;border-radius:0;}
+.fig--cutout .media img{height:auto;object-fit:contain;}
 .cap{font-size:.75rem;color:var(--text-subtle);font-style:italic;margin-top:.7rem;text-align:center;}
 
 /* proof */
