@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Infento — His first ride, built by you, together</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  /* brand ramp */
+  --orange-50:#F9E6E9;--orange-500:#C41E3A;--orange-600:#B01932;--orange-700:#9C162A;
+  --sunny-100:#FFEFC0;--sunny-400:#FFC83D;--sunny-600:#E2A510;
+  --sky-100:#C8EBEF;--sky-500:#149AA8;--sky-700:#0C6B76;
+  --ink-950:#18130F;--ink-900:#241D17;--ink-800:#38302A;--ink-700:#4E443C;--ink-600:#6E6258;
+  --ink-500:#8C8075;--ink-400:#B0A597;--ink-300:#D2C8BA;--ink-200:#E7DECF;--ink-150:#EFE7DA;
+  --ink-100:#F6F0E6;--ink-50:#FBF7F0;--white:#FFFFFF;
+  --green-100:#D6F0DD;--green-500:#2E9E5B;--green-700:#1C6B3C;
+
+  --brand:var(--orange-500);--brand-hover:var(--orange-600);--brand-pressed:var(--orange-700);
+  --brand-soft:var(--orange-50);--on-brand:var(--white);
+  --accent-sunny:var(--sunny-400);--accent-sky:var(--sky-500);
+  --text-strong:var(--ink-950);--text-body:var(--ink-800);--text-muted:var(--ink-600);
+  --text-subtle:var(--ink-500);--text-on-dark:var(--ink-50);--text-on-dark-mut:rgba(251,247,240,.68);
+  --surface-page:var(--ink-50);--surface-card:var(--white);--surface-cream:var(--ink-100);
+  --surface-dark:var(--ink-950);--border:var(--ink-200);--border-strong:var(--ink-300);
+
+  --font-display:'Bricolage Grotesque','Inter',system-ui,sans-serif;
+  --font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'Space Mono',ui-monospace,Menlo,monospace;
+  --fw-medium:500;--fw-semibold:600;--fw-bold:700;--fw-extra:800;
+
+  --radius-sm:10px;--radius-md:16px;--radius-lg:22px;--radius-xl:28px;--radius-2xl:36px;--radius-pill:999px;
+  --shadow-xs:0 1px 2px rgba(36,29,23,.06);--shadow-sm:0 2px 6px rgba(36,29,23,.07);
+  --shadow-md:0 6px 18px rgba(36,29,23,.09);--shadow-lg:0 16px 40px rgba(36,29,23,.12);
+  --shadow-brand:0 8px 20px rgba(196,30,58,.26);
+  --dur-base:200ms;--ease-out:cubic-bezier(.22,1,.36,1);
+  --container:1180px;--gutter:1.5rem;--section-y:5.5rem;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;font-family:var(--font-sans);font-size:1rem;line-height:1.55;color:var(--text-body);
+  background:var(--surface-page);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;}
+h1,h2,h3,h4{font-family:var(--font-display);color:var(--text-strong);margin:0;font-weight:var(--fw-bold);text-wrap:balance;}
+p{margin:0;text-wrap:pretty;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--container);margin:0 auto;padding-inline:var(--gutter);}
+
+.over{font-family:var(--font-mono);font-size:.6875rem;line-height:1.2;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:var(--fw-bold);color:var(--brand);}
+
+/* button */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;font-family:var(--font-sans);
+  font-weight:var(--fw-semibold);font-size:1.0625rem;line-height:1;white-space:nowrap;border:1.5px solid transparent;
+  background:var(--brand);color:var(--on-brand);border-radius:var(--radius-pill);cursor:pointer;text-decoration:none;
+  padding:0 1.75rem;height:3.375rem;box-shadow:var(--shadow-brand);
+  transition:transform var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out),box-shadow var(--dur-base);}
+.btn:hover{transform:translateY(-2px);background:var(--brand-hover);text-decoration:none;}
+.btn:active{transform:scale(.97);background:var(--brand-pressed);}
+.btn--sm{height:2.6rem;font-size:.9375rem;padding:0 1.1rem;}
+.btn--secondary{background:var(--surface-card);color:var(--text-strong);border-color:var(--border-strong);box-shadow:var(--shadow-xs);}
+.btn--secondary:hover{background:var(--ink-50);border-color:var(--text-subtle);}
+.btn .ico{width:1.15em;height:1.15em;}
+
+/* badge */
+.badge{display:inline-flex;align-items:center;gap:.4em;font-family:var(--font-sans);font-size:.75rem;
+  font-weight:var(--fw-bold);line-height:1;letter-spacing:.01em;padding:.45em .75em;border-radius:var(--radius-pill);}
+.badge--sunny{background:var(--sunny-400);color:var(--ink-950);}
+.badge--green{background:var(--green-100);color:var(--green-700);}
+.badge--brand{background:var(--brand);color:var(--on-brand);}
+.badge .dot{width:.5em;height:.5em;border-radius:50%;background:currentColor;}
+
+/* stars */
+.stars{display:inline-flex;gap:.12rem;color:var(--sunny-400);}
+.stars svg{width:1.15rem;height:1.15rem;}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--surface-page) 88%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav__in{display:flex;align-items:center;justify-content:space-between;height:4.5rem;}
+.nav__logo{height:1.9rem;width:auto;}
+
+/* hero */
+.hero{padding:3.75rem 0 1.5rem;}
+.hero__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;}
+.hero h1{font-size:clamp(2.5rem,5.2vw,4.25rem);line-height:.98;letter-spacing:-.03em;margin:1.1rem 0 1.2rem;}
+.hero h1 em{font-style:normal;color:var(--brand);}
+.lead{font-size:1.25rem;line-height:1.5;color:var(--text-body);max-width:34ch;}
+.hero__cta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem;}
+.hero__trust{display:flex;align-items:center;gap:.8rem;margin-top:2rem;}
+.hero__trust b{color:var(--text-strong);}
+.media{border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-lg);background:var(--surface-cream);}
+.media img{width:100%;height:100%;object-fit:cover;display:block;}
+/* decorative rounded block backdrop */
+.fig{position:relative;isolation:isolate;}
+.fig>.media{position:relative;z-index:1;}
+.fig__block{position:absolute;z-index:0;width:100%;height:auto;left:14%;top:-6%;color:#E3D8F1;pointer-events:none;}
+/* cutout mode: transparent PNG floats on the block backdrop */
+.fig--cutout .media{background:transparent;box-shadow:none;border:none;overflow:visible;border-radius:0;}
+.fig--cutout .media img{height:auto;object-fit:contain;}
+.cap{font-size:.75rem;color:var(--text-subtle);font-style:italic;margin-top:.7rem;text-align:center;}
+
+/* proof strip */
+.proof{border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-top:1.5rem;}
+.proof__in{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.6rem 1.6rem;padding:1.4rem 0;}
+.proof__item{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.04em;color:var(--text-muted);
+  display:inline-flex;align-items:center;gap:.7rem;}
+.proof__item b{color:var(--text-strong);font-weight:700;}
+.proof__sep{width:5px;height:5px;border-radius:50%;background:var(--ink-300);}
+
+/* section heading */
+.sec{padding:var(--section-y) 0;}
+.sec__head{text-align:center;max-width:46ch;margin:0 auto 3rem;}
+.sec__head h2{font-size:clamp(2rem,3.6vw,2.85rem);line-height:1.06;letter-spacing:-.02em;margin-top:.7rem;}
+.sec__head p{font-size:1.125rem;color:var(--text-muted);margin-top:.9rem;}
+
+/* product evolution row */
+.evo{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:1rem;align-items:center;}
+.evo__card{background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius-xl);
+  padding:1.25rem;box-shadow:var(--shadow-sm);text-align:center;}
+.evo__card .ph{aspect-ratio:1/1;border-radius:var(--radius-md);overflow:hidden;background:var(--surface-cream);margin-bottom:1rem;}
+.evo__step{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-subtle);}
+.evo__card h4{font-size:1.25rem;margin-top:.25rem;}
+.evo__age{font-family:var(--font-mono);font-size:.75rem;color:var(--brand);margin-top:.35rem;}
+.evo__arrow{color:var(--ink-300);}
+.evo__arrow svg{width:1.6rem;height:1.6rem;}
+.evo__note{text-align:center;font-family:var(--font-mono);font-size:.8rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--text-muted);margin-top:2.25rem;}
+.evo__note b{color:var(--brand);}
+
+/* value props */
+.props{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.prop{background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius-xl);
+  padding:2rem 1.75rem;box-shadow:var(--shadow-sm);}
+.prop__ico{width:3.25rem;height:3.25rem;border-radius:var(--radius-md);background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;}
+.prop__ico svg{width:1.6rem;height:1.6rem;}
+.prop h3{font-size:1.375rem;letter-spacing:-.01em;margin-bottom:.5rem;}
+.prop p{color:var(--text-muted);}
+
+/* testimonial */
+.quote{background:var(--surface-cream);}
+.quote__in{max-width:48rem;margin:0 auto;text-align:center;padding:var(--section-y) 0;}
+.quote blockquote{font-family:var(--font-display);font-weight:600;font-size:clamp(1.6rem,3.4vw,2.4rem);
+  line-height:1.22;letter-spacing:-.02em;color:var(--text-strong);margin:1.5rem 0 1.75rem;}
+.quote figcaption{font-size:1rem;color:var(--text-muted);}
+.quote figcaption b{color:var(--text-strong);}
+
+/* final cta */
+.final{padding-bottom:var(--section-y);}
+.final__band{background:var(--surface-dark);border-radius:var(--radius-2xl);padding:clamp(2.75rem,5vw,4.5rem);
+  text-align:center;position:relative;overflow:hidden;}
+.final__band::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 120% at 50% -20%,rgba(196,30,58,.32),transparent 55%);pointer-events:none;}
+.final__band>*{position:relative;}
+.final h2{color:var(--text-on-dark);font-size:clamp(2.1rem,4.4vw,3.4rem);line-height:1.02;letter-spacing:-.025em;}
+.final p{color:var(--text-on-dark-mut);font-size:1.25rem;margin:1.1rem auto 2rem;max-width:40ch;}
+.final .fine{color:var(--text-on-dark-mut);font-size:.85rem;margin-top:1.1rem;display:inline-flex;gap:.6rem;align-items:center;}
+.final .fine .dot{width:4px;height:4px;border-radius:50%;background:currentColor;}
+
+/* footer */
+.foot{border-top:1px solid var(--border);padding:2.5rem 0;}
+.foot__in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.foot img{height:1.5rem;}
+.foot span{font-family:var(--font-mono);font-size:.75rem;color:var(--text-subtle);letter-spacing:.04em;}
+
+@media (max-width:880px){
+  :root{--section-y:3.75rem;}
+  .hero__grid{grid-template-columns:1fr;gap:1.75rem;}
+  .hero{padding-top:1.75rem;}
+  .lead{max-width:none;}
+  /* product photo first on mobile */
+  .hero__grid>div:last-child{order:-1;}
+  .fig--cutout .media img{width:100%!important;margin:0!important;}
+  .fig__block{left:0;top:-4%;width:100%;height:auto;}
+  .evo{grid-template-columns:1fr;gap:.75rem;}
+  .evo__arrow{transform:rotate(90deg);justify-self:center;}
+  .props{grid-template-columns:1fr;}
+  .nav__logo{height:1.55rem;}
+  .nav .btn--sm{font-size:.82rem;padding:0 .85rem;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+
+</head>
+<body style="">
+<main data-screen-label="Toddler landing">
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap nav__in">
+      <img class="nav__logo" src="assets/logo-horizontal.png" alt="Infento">
+      <a class="btn btn--sm" href="#buy">Shop the Adventure Kit</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <span class="over">Ages 0–4 · Build together</span>
+        <h1 style="">Your first ride —<br>built&nbsp;<span style="color: rgb(196, 30, 58);">together</span>.</h1>
+        <p class="lead">From walker to balance bike — one Kit that grows with your child from day one.</p>
+        <div class="hero__cta">
+          <a class="btn" href="#buy">Shop the Adventure Kit
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+          </a>
+          <a class="btn btn--secondary" href="#how">See how it grows</a>
+        </div>
+        <div class="hero__trust">
+          <span class="stars" aria-label="4.8 out of 5">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+          </span>
+          <span style="font-size:.95rem;color:var(--text-muted)"><b>4.8/5</b> from 2,500+ families</span>
+        </div>
+      </div>
+      <div>
+        <div class="fig fig--cutout">
+          <svg class="fig__block" viewBox="0 0 898 686" aria-hidden="true"><path d="M885.128 391.452L590.922 20.8066C572.834 -1.98012 540.13 -6.73958 516.298 9.94671L23.4564 355.017C-8.46803 377.37 -7.65985 424.917 25.0058 446.172L378.982 676.494C394.98 686.903 415.231 688.274 432.486 680.116L865.558 475.369C897.585 460.227 907.153 419.199 885.128 391.452Z" fill="currentColor"></path></svg>
+          <div class="media">
+          <img src="assets/toddler-hero.png" alt="A mother and daughter unboxing an Infento kit together" style="width: 515px; object-fit: contain; margin: 0px 0px 1px 56px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="proof">
+    <div class="wrap proof__in">
+      <span class="proof__item"><b>2,500+</b> families building</span>
+      <span class="proof__sep"></span>
+      <span class="proof__item">Ships to <b>45+</b> countries</span>
+      <span class="proof__sep"></span>
+      <span class="proof__item">Built to last <b>a childhood</b></span>
+    </div>
+  </section>
+
+  <!-- PRODUCT -->
+  <section class="sec" id="how">
+    <div class="wrap">
+      <div class="sec__head">
+        <span class="over">The Adventure Kit</span>
+        <h2>One Kit. Three rides, so far.</h2>
+        <p>The same parts your toddler started with become their next ride — and the one after that.</p>
+      </div>
+      <div class="evo">
+        <div class="evo__card">
+          <div class="ph"><img src="uploads/toddler-step1.png" alt="Infento walker build"></div>
+          <span class="evo__step">Step one</span>
+          <h4>Push Walker</h4>
+          <p class="evo__age">From 6 months</p>
+        </div>
+        <span class="evo__arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+        </span>
+        <div class="evo__card">
+          <div class="ph"><img src="uploads/toddler-step2.png" alt="Infento push ride build"></div>
+          <span class="evo__step">Step two</span>
+          <h4>Push Ride-on</h4>
+          <p class="evo__age">From 18 months</p>
+        </div>
+        <span class="evo__arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+        </span>
+        <div class="evo__card">
+          <div class="ph"><img src="uploads/toddler-step3.png" alt="Infento balance bike build"></div>
+          <span class="evo__step">Step three</span>
+          <h4>Balance Bike</h4>
+          <p class="evo__age">From 3 years</p>
+        </div>
+      </div>
+      <p class="evo__note">Start at 6 months. <b>Rebuild as they grow.</b></p>
+    </div>
+  </section>
+
+  <!-- VALUE PROPS -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="props">
+        <div class="prop">
+          <span class="prop__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.7 8.9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.5 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+          <h3>Safety first</h3>
+          <p>Aluminium parts, no sharp edges, tested for ages 0+. Built to be ridden, dropped, and loved.</p>
+        </div>
+        <div class="prop">
+          <span class="prop__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"></path><path d="M10 20c5.5-2.5.8-6.4 3-10"></path><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"></path><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"></path></svg></span>
+          <h3>Grows with your child</h3>
+          <p>Rebuild into 26+ different rides as they develop — one Kit that keeps up, from crawling to cruising.</p>
+        </div>
+        <div class="prop">
+          <span class="prop__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></svg></span>
+          <h3>Easy to assemble</h3>
+          <p>No tools to hunt for — just the one hex key. Build it together in under 30 minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="quote">
+    <div class="wrap">
+      <figure class="quote__in" style="margin:0">
+        <span class="stars" aria-label="5 out of 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9l-5.8 3.07 1.1-6.47L2.6 9.9l6.5-.95L12 2.5z"></path></svg>
+        </span>
+        <blockquote>“We bought this when Emma was 18 months. She's 4 now and still using it — just in a completely different form.”</blockquote>
+        <figcaption><b>Sarah</b> · mother of 2 · Netherlands</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final" id="buy">
+    <div class="wrap">
+      <div class="final__band">
+        <span class="badge badge--sunny" style="margin-bottom:1.25rem">The Adventure Kit</span>
+        <h2>The only ride they'll ever need.</h2>
+        <p>Free shipping on orders over €150.</p>
+        <a class="btn" href="#" style="background:var(--brand)">Get the Adventure Kit
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+        </a>
+        <div class="fine"><span>30-day returns</span><span class="dot"></span><span>Secure checkout</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <img src="assets/logo-horizontal.png" alt="Infento">
+      <span>© 2026 Infento Rides · Assembled with love in Amsterdam</span>
+    </div>
+  </footer>
+
+</main>
+
+
+</body></html>
